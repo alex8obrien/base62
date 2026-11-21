@@ -2,9 +2,7 @@ package base62
 
 import (
 	"math/bits"
-	"reflect"
 	"strconv"
-	"unsafe"
 )
 
 const (
@@ -266,14 +264,9 @@ func (dec decoder) decode(dst []byte, decTable []byte) (int, error) {
 }
 
 func b2s(b []byte) string {
-	return *(*string)(unsafe.Pointer(&b))
+	return string(b)
 }
 
-func s2b(s string) (b []byte) {
-	sh := (*reflect.StringHeader)(unsafe.Pointer(&s))
-	bh := (*reflect.SliceHeader)(unsafe.Pointer(&b))
-	bh.Data = sh.Data
-	bh.Len = sh.Len
-	bh.Cap = sh.Len
-	return
+func s2b(s string) []byte {
+	return []byte(s)
 }

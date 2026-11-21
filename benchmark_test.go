@@ -38,91 +38,91 @@ func encodeWithBigInt(b []byte) []byte {
 }
 
 func Benchmark_Encode_V2(bb *testing.B) {
-	for i := 0; i < bb.N; i++ {
+	for bb.Loop() {
 		_ = StdEncoding._encodeV2(testRandBytes)
 	}
 }
 
 func Benchmark_Encode_legacyV1(bb *testing.B) {
-	for i := 0; i < bb.N; i++ {
+	for bb.Loop() {
 		_ = StdEncoding._encodeV1(testRandBytes)
 	}
 }
 
 func Benchmark_EncodeToString(bb *testing.B) {
-	for i := 0; i < bb.N; i++ {
+	for bb.Loop() {
 		_ = EncodeToString(testRandBytes)
 	}
 }
 
 func Benchmark_EncodeToBuf(bb *testing.B) {
 	buf := make([]byte, 0, 1000)
-	for i := 0; i < bb.N; i++ {
+	for bb.Loop() {
 		_ = EncodeToBuf(buf, testRandBytes)
 	}
 }
 
 func Benchmark_Decode(bb *testing.B) {
-	for i := 0; i < bb.N; i++ {
+	for bb.Loop() {
 		_, _ = Decode(testEncodedBytes)
 	}
 }
 
 func Benchmark_DecodeString(bb *testing.B) {
 	s := string(testEncodedBytes)
-	for i := 0; i < bb.N; i++ {
+	for bb.Loop() {
 		_, _ = DecodeString(s)
 	}
 }
 
 func Benchmark_DecodeToBuf(bb *testing.B) {
 	buf := make([]byte, 0, 1000)
-	for i := 0; i < bb.N; i++ {
+	for bb.Loop() {
 		_, _ = DecodeToBuf(buf, testRandBytes)
 	}
 }
 
 func Benchmark_Encode_BigInt(bb *testing.B) {
-	for i := 0; i < bb.N; i++ {
+	for bb.Loop() {
 		_ = encodeWithBigInt(testRandBytes)
 	}
 }
 
 func Benchmark_Base64_EncodeToString(bb *testing.B) {
-	for i := 0; i < bb.N; i++ {
+	for bb.Loop() {
 		_ = base64.RawStdEncoding.EncodeToString(testRandBytes)
 	}
 }
 
 func Benchmark_Base64_Encode(bb *testing.B) {
 	buf := make([]byte, 1000)
-	for i := 0; i < bb.N; i++ {
+	for bb.Loop() {
 		base64.RawStdEncoding.Encode(buf, testRandBytes)
 	}
 }
 
 func Benchmark_Base64_DecodeString(bb *testing.B) {
 	s := string(testEncodedBase64)
-	for i := 0; i < bb.N; i++ {
+	for bb.Loop() {
 		_, _ = base64.RawStdEncoding.DecodeString(s)
 	}
 }
 
 func Benchmark_Base64_Decode(bb *testing.B) {
 	buf := make([]byte, 1000)
-	for i := 0; i < bb.N; i++ {
+	for bb.Loop() {
 		_, _ = base64.RawStdEncoding.Decode(buf, testEncodedBase64)
 	}
 }
 
 func Benchmark_EncodeInteger(bb *testing.B) {
-	for i := 0; i < bb.N; i++ {
+	for bb.Loop() {
 		_ = FormatUint(testInteger)
 	}
 }
 
 func Benchmark_DecodeInteger(bb *testing.B) {
-	for i := 0; i < bb.N; i++ {
+	for bb.Loop() {
 		_, _ = ParseUint(testEncodedInteger)
 	}
 }
